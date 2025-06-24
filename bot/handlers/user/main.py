@@ -503,26 +503,8 @@ async def crypto_payment(call: CallbackQuery):
 
     sleep_time = int(TgConfig.PAYMENT_TIME)
     lang = get_user_language(user_id) or 'en'
-
     markup = crypto_invoice_menu(payment_id, lang)
-
     text = t(lang, 'invoice_message', amount=pay_amount, currency=currency, address=address)
-
-    sleep_time = int(TgConfig.PAYMENT_TIME)
-    lang = get_user_language(user_id) or 'en'
-
-    markup = crypto_invoice_menu(payment_id, lang)
-
-    text = t(lang, 'invoice_message', amount=pay_amount, currency=currency, address=address)
-
-    invoice_id, address = await create_invoice(float(amount), currency)
-    start_operation(user_id, amount, invoice_id)
-    sleep_time = int(TgConfig.PAYMENT_TIME)
-    lang = get_user_language(user_id) or 'en'
-
-    markup = crypto_invoice_menu(invoice_id, lang)
-
-    text = t(lang, 'invoice_message', amount=amount, currency=currency, address=address)
 
     # Generate QR code for the address
     qr = qrcode.make(address)
